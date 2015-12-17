@@ -1,5 +1,0 @@
-FROM java:8
-
-ENV APP_HOME /myapp
-RUN mkdir $APP_HOME
-WORKDIR $APP_HOME

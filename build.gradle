@@ -23,7 +23,7 @@ def environment = System.getenv()
 
 flyway {
     driver = 'com.mysql.jdbc.Driver'
-    url = environment.getOrDefault("DATABASE", 'jdbc:mysql://localhost:3306/ke_tsu?user=mysql&password=mysql') + "&allowMultiQueries=true";
+    url = environment.getOrDefault("DATABASE", 'jdbc:mysql://localhost:3306/appdb?user=mysql&password=mysql') + "&allowMultiQueries=true";
 }
 
 
@@ -60,7 +60,7 @@ dependencies {
 }
 
 task standaloneJar(type: Jar, dependsOn: jar) {
-    baseName = "ketsu"
+    baseName = "app"
     classifier = "standalone"
     version = ""
 

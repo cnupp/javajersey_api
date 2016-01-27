@@ -17,7 +17,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'flyway'
 
-mainClassName = "com.tw.Main"
+mainClassName = "com.tw.javajersey.MainServer"
 
 def environment = System.getenv()
 
@@ -35,6 +35,7 @@ repositories {
 
 ext {
     jerseyVersion = "2.22.1"
+    main = 'com.tw.javajersey.MainServer'
 }
 
 dependencies {
@@ -74,4 +75,8 @@ task standaloneJar(type: Jar, dependsOn: jar) {
     exclude("META-INF/*.RSA")
     exclude("META-INF/*.RSA")
     exclude("META-INF/*.RSA")
+    manifest {
+        attributes 'Main-Class': "$main"
+    }
+
 }

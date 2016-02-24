@@ -1,0 +1,32 @@
+meta:
+  description: ''
+  verify:
+    image: 'hub.deepi.cn/javajersey-test-verify'
+    mem: 512
+    cpus: 1.0
+  build:
+    image: 'hub.deepi.cn/javajersey-test-build'
+    mem: 1024
+    cpus: 1.0
+services:
+  web:
+    main: yes
+    mem: 512
+    cpus: 0.4
+    instances: 1
+    links:
+      - db
+    expose: 8088
+  db:
+    mem: 256
+    instances: 1
+    cpus: 0.2
+    image: tutum/mysql
+    environment:
+      MYSQL_PASS: "mysql"
+      MYSQL_USER: "mysql"
+      MYSQL_PASSWORD: "mysql"
+      ON_CREATE_DB: "stacks"
+      EXTRA_OPTS: "--lower_case_table_names=1"
+    expose: 3306
+

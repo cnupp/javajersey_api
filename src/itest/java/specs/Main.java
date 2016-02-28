@@ -21,10 +21,10 @@ public class Main {
         }
         Result result = JUnitCore.runClasses(JunitTestSuite.class);
         if (!result.getFailures().isEmpty()) {
-            instance.exit(1, false);
+            instance.exit(1, true);
         }
 
-        instance.exit(0, false);
+        instance.exit(0, true);
     }
 
     private void exit(int exitCode, boolean submitResult) throws IOException {

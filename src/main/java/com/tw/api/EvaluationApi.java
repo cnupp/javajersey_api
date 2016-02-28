@@ -88,13 +88,13 @@ public class EvaluationApi {
 
         cmds.add(String.format("git clone https://github.com/aisensiy/%s.git %s", projectName(), applicationName()));
         cmds.add("cd " + applicationName());
-        cmds.add(String.format("cde apps:create %s %s", applicationName(), stackName()));
 
 //        cmds.add(String.format("git remote add evaluation-codebase %s", evaluationCodeUri()));
 //        cmds.add("git subtree add --prefix=\"integration_test\" evaluation-codebase master");
         cmds.add("echo '" + generateMeta(entryPoint) + "' > manifest.json");
         cmds.add("rm -rf .git");
         cmds.add("git init && git add . && git commit -m 'Initial commit'");
+        cmds.add(String.format("cde apps:create %s %s || cde git:remote %s", applicationName(), stackName(), applicationName()));
 
         return cmds.stream().collect(Collectors.joining("\n"));
     }

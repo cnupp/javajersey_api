@@ -1,0 +1,371 @@
+<!DOCTYPE HTML><html><head><title>科举系统 API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/kevinrenskers/raml2html 2.1.0"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script><script type="text/javascript">
+      $(document).ready(function() {
+        $('.page-header pre code, .top-resource-description pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+
+        $('[data-toggle]').click(function() {
+          var selector = $(this).data('target') + ' pre code';
+          $(selector).each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        });
+
+        // open modal on hashes like #_action_get
+        $(window).bind('hashchange', function(e) {
+          var anchor_id = document.location.hash.substr(1); //strip #
+          var element = $('#' + anchor_id);
+
+          // do we have such element + is it a modal?  --> show it
+          if (element.length && element.hasClass('modal')) {
+            element.modal('show');
+          }
+        });
+
+        // execute hashchange on first page load
+        $(window).trigger('hashchange');
+
+        // remove url fragment on modal hide
+        $('.modal').on('hidden.bs.modal', function() {
+          if(history && history.replaceState) {
+            history.replaceState({}, '', '#');
+          }
+        });
+      });
+    </script><style>
+      .hljs {
+        background: transparent;
+      }
+      .parent {
+        color: #999;
+      }
+      .list-group-item > .badge {
+        float: none;
+        margin-right: 6px;
+      }
+      .panel-title > .methods {
+        float: right;
+      }
+      .badge {
+        border-radius: 0;
+        text-transform: uppercase;
+        width: 70px;
+        font-weight: normal;
+        color: #f3f3f6;
+        line-height: normal;
+      }
+      .badge_get {
+        background-color: #63a8e2;
+      }
+      .badge_post {
+        background-color: #6cbd7d;
+      }
+      .badge_put {
+        background-color: #22bac4;
+      }
+      .badge_delete {
+        background-color: #d26460;
+      }
+      .badge_patch {
+        background-color: #ccc444;
+      }
+      .list-group, .panel-group {
+        margin-bottom: 0;
+      }
+      .panel-group .panel+.panel-white {
+        margin-top: 0;
+      }
+      .panel-group .panel-white {
+        border-bottom: 1px solid #F5F5F5;
+        border-radius: 0;
+      }
+      .panel-white:last-child {
+        border-bottom-color: white;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      .panel-white .panel-heading {
+        background: white;
+      }
+      .tab-pane ul {
+        padding-left: 2em;
+      }
+      .tab-pane h2 {
+        font-size: 1.2em;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #ddd;
+      }
+      .tab-pane h3 {
+        font-size: 1.1em;
+      }
+      .tab-content {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+      }
+      #sidebar {
+        margin-top: 30px;
+        padding-right: 5px;
+        overflow: auto;
+        height: 90%;
+      }
+      .top-resource-description {
+        border-bottom: 1px solid #ddd;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description {
+        border-bottom: 1px solid #fcfcfc;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description p:last-child {
+        margin: 0;
+      }
+      .list-group .badge {
+        float: left;
+      }
+      .method_description {
+        margin-left: 85px;
+      }
+      .method_description p:last-child {
+        margin: 0;
+      }
+      .list-group-item {
+        cursor: pointer;
+      }
+      .list-group-item:hover {
+        background-color: #f5f5f5;
+      }
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>科举系统 API documentation</h1><p></p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="solutions" class="panel-title">/solutions</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_solutions"><span class="parent"></span>/solutions</a> <span class="methods"><a href="#solutions_get"><span class="badge badge_get">get</span></a> <a href="#solutions_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_solutions" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#solutions_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>cto/opt获取所有的solutions</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#solutions_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>cto/opt创建solution</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="solutions_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/solutions</h4></div><div class="modal-body"><div class="alert alert-info"><p>cto/opt获取所有的solutions</p></div><ul class="nav nav-tabs"><li><a href="#solutions_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane" id="solutions_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>[
+  {
+    id: 1,
+    uri: "/solutions/1",
+    name: "data api"
+  },
+  {
+    id: 2,
+    uri: "/solutions/2",
+    name: "frontend"
+  }
+]
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="solutions_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/solutions</h4></div><div class="modal-body"><div class="alert alert-info"><p>cto/opt创建solution</p></div><ul class="nav nav-tabs"><li class="active"><a href="#solutions_post_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="solutions_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  name: "data api"
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_solutions__solution_id_"><span class="parent">/solutions</span>/{solution_id}</a> <span class="methods"><a href="#solutions__solution_id__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_solutions__solution_id_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#solutions__solution_id__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>get solution description</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="solutions__solution_id__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/solutions</span>/{solution_id}</h4></div><div class="modal-body"><div class="alert alert-info"><p>get solution description</p></div><ul class="nav nav-tabs"><li class="active"><a href="#solutions__solution_id__get_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="solutions__solution_id__get_request"><h3>URI Parameters</h3><ul><li><strong>solution_id</strong>: <em>required (string)</em></li></ul></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="stacks" class="panel-title">/stacks</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_stacks"><span class="parent"></span>/stacks</a> <span class="methods"><a href="#stacks_get"><span class="badge badge_get">get</span></a> <a href="#stacks_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_stacks" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#stacks_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>stack owner获取stacks</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#stacks_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>stack owner定义stack</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="stacks_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/stacks</h4></div><div class="modal-body"><div class="alert alert-info"><p>stack owner获取stacks</p></div><ul class="nav nav-tabs"><li><a href="#stacks_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane" id="stacks_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>[
+  {
+    id: 1,
+    uri: "/stacks/1",
+    name: "data api"
+  },
+  {
+    id: 2,
+    uri: "/stacks/2",
+    name: "frontend"
+  }
+]
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="stacks_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/stacks</h4></div><div class="modal-body"><div class="alert alert-info"><p>stack owner定义stack</p></div><ul class="nav nav-tabs"><li class="active"><a href="#stacks_post_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="stacks_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  name: "data api"
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_stacks__stack_id_"><span class="parent">/stacks</span>/{stack_id}</a> <span class="methods"><a href="#stacks__stack_id__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_stacks__stack_id_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#stacks__stack_id__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>get stack</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="stacks__stack_id__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/stacks</span>/{stack_id}</h4></div><div class="modal-body"><div class="alert alert-info"><p>get stack</p></div><ul class="nav nav-tabs"><li class="active"><a href="#stacks__stack_id__get_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="stacks__stack_id__get_request"><h3>URI Parameters</h3><ul><li><strong>stack_id</strong>: <em>required (string)</em></li></ul></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="projects" class="panel-title">/projects</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_projects"><span class="parent"></span>/projects</a> <span class="methods"><a href="#projects_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_projects" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#projects_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>同步projects到考试系统</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="projects_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/projects</h4></div><div class="modal-body"><div class="alert alert-info"><p>同步projects到考试系统</p></div><ul class="nav nav-tabs"><li class="active"><a href="#projects_post_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="projects_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_projects__project_id_"><span class="parent">/projects</span>/{project_id}</a> <span class="methods"><a href="#projects__project_id__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_projects__project_id_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#projects__project_id__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>获取project信息</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="projects__project_id__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/projects</span>/{project_id}</h4></div><div class="modal-body"><div class="alert alert-info"><p>获取project信息</p></div><ul class="nav nav-tabs"><li class="active"><a href="#projects__project_id__get_request" data-toggle="tab">Request</a></li><li><a href="#projects__project_id__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="projects__project_id__get_request"><h3>URI Parameters</h3><ul><li><strong>project_id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="projects__project_id__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  id: 1,
+  uri: "/projects/1",
+  name: "vodafone webcenter",
+  capabilities_uri: "/projects/1/capabilities"
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_projects__project_id__capabilities"><span class="parent">/projects/{project_id}</span>/capabilities</a> <span class="methods"><a href="#projects__project_id__capabilities_post"><span class="badge badge_post">post</span></a> <a href="#projects__project_id__capabilities_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_projects__project_id__capabilities" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#projects__project_id__capabilities_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>capacity project创建capability定义, 如solution为data-api, stack为springboot + mysql</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#projects__project_id__capabilities_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>capacity project获取自己定义的capability列表information</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="projects__project_id__capabilities_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/projects/{project_id}</span>/capabilities</h4></div><div class="modal-body"><div class="alert alert-info"><p>capacity project创建capability定义, 如solution为data-api, stack为springboot + mysql</p></div><ul class="nav nav-tabs"><li class="active"><a href="#projects__project_id__capabilities_post_request" data-toggle="tab">Request</a></li><li><a href="#projects__project_id__capabilities_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="projects__project_id__capabilities_post_request"><h3>URI Parameters</h3><ul><li><strong>project_id</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/x-www-form-urlencoded</strong></p><strong>Form Parameters</strong><ul><li><strong>solution_id</strong>: <em>(string)</em></li><li><strong>stack_id</strong>: <em>(string)</em></li></ul></div><div class="tab-pane" id="projects__project_id__capabilities_post_response"><h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="projects__project_id__capabilities_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/projects/{project_id}</span>/capabilities</h4></div><div class="modal-body"><div class="alert alert-info"><p>capacity project获取自己定义的capability列表information</p></div><ul class="nav nav-tabs"><li class="active"><a href="#projects__project_id__capabilities_get_request" data-toggle="tab">Request</a></li><li><a href="#projects__project_id__capabilities_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="projects__project_id__capabilities_get_request"><h3>URI Parameters</h3><ul><li><strong>project_id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="projects__project_id__capabilities_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>[
+  {
+    id: 1,
+    uri: "/projects/1/capabilities",
+    created_at: "2015-8-4",
+    solution: {
+      id: 1,
+      uri: "/solutions/1",
+      name: "data api"
+    },
+    stack: {
+      id: 1,
+      uri: "/stacks/1",
+      name: "spring boot + mysql"
+    }
+  }
+]
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_projects__project_id__capabilities__capability_id_"><span class="parent">/projects/{project_id}/capabilities</span>/{capability_id}</a> <span class="methods"><a href="#projects__project_id__capabilities__capability_id__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_projects__project_id__capabilities__capability_id_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#projects__project_id__capabilities__capability_id__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>capacity project获取自己的某个capability情况，包括capability描述信息，当前多少capacity正在进行考试，多少capacty已经获得了qualification</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="projects__project_id__capabilities__capability_id__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/projects/{project_id}/capabilities</span>/{capability_id}</h4></div><div class="modal-body"><div class="alert alert-info"><p>capacity project获取自己的某个capability情况，包括capability描述信息，当前多少capacity正在进行考试，多少capacty已经获得了qualification</p></div><ul class="nav nav-tabs"><li class="active"><a href="#projects__project_id__capabilities__capability_id__get_request" data-toggle="tab">Request</a></li><li><a href="#projects__project_id__capabilities__capability_id__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="projects__project_id__capabilities__capability_id__get_request"><h3>URI Parameters</h3><ul><li><strong>project_id</strong>: <em>required (string)</em></li><li><strong>capability_id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="projects__project_id__capabilities__capability_id__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  id: 1,
+  uri: "/projects/1/capabilities/{capability_id}",
+  created_at: "2015-8-4",
+  solution: {
+    id: 1,
+    uri: "/solutions/1",
+    name: "data api"
+  },
+  stack: {
+    id: 1,
+    uri: "/stacks/1",
+    name: "spring boot + mysql"
+  },
+  qualifications: [
+    {
+      id: 100,
+      uri: "/projects/1/users/100/qualifications/100",
+      user: {
+        id: 100,
+        uri: "/users/101",
+      }
+      created_at: "2015-8-5",
+      score: 80
+    },
+    {
+      id: 101,
+      uri: "/projects/1/users/100/qualifications/101",
+      user: {
+        id: 100,
+        uri: "/users/101",
+      }
+      created_at: "2015-8-5",
+      score: 86
+    }
+  ],
+  evaluation-requests: [
+    {
+      id: 200,
+      uri: "/projects/1/users/200/evaluation-requests/200",
+      user: {
+        id: 200,
+        uri: "/users/200",
+      }
+      created_at: "2015-8-3",
+      status: "NEW"
+    },
+    {
+      id: 201,
+      uri: "/projects/1/users/201/evaluation-requests/201",
+      user: {
+        id: 201,
+        uri: "/users/201s",
+      }
+      created_at: "2015-8-3",
+      status: "FAILED"
+    },
+    {
+      id: 201,
+      uri: "/projects/1/users/201/evaluation-requests/201",
+      user: {
+        id: 201,
+        uri: "/users/201s",
+      }
+      created_at: "2015-8-3",
+      status: "SUCCESS",
+      qualification: {
+        id: 101,
+        uri: "/projects/1/users/101/qualifications/101",
+        user: {
+          id: 100,
+          uri: "/users/101",
+        }
+        created_at: "2015-8-5",
+        score: 86
+      }
+    }
+  ]
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_projects__project_id__users"><span class="parent">/projects/{project_id}</span>/users</a> <span class="methods"><a href="#projects__project_id__users_post"><span class="badge badge_post">post</span></a> <a href="#projects__project_id__users_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_projects__project_id__users" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#projects__project_id__users_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>关联user</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#projects__project_id__users_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>get all project members including qualifications</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="projects__project_id__users_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/projects/{project_id}</span>/users</h4></div><div class="modal-body"><div class="alert alert-info"><p>关联user</p></div><ul class="nav nav-tabs"><li class="active"><a href="#projects__project_id__users_post_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="projects__project_id__users_post_request"><h3>URI Parameters</h3><ul><li><strong>project_id</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  user_id: 1
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="projects__project_id__users_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/projects/{project_id}</span>/users</h4></div><div class="modal-body"><div class="alert alert-info"><p>get all project members including qualifications</p></div><ul class="nav nav-tabs"><li class="active"><a href="#projects__project_id__users_get_request" data-toggle="tab">Request</a></li><li><a href="#projects__project_id__users_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="projects__project_id__users_get_request"><h3>URI Parameters</h3><ul><li><strong>project_id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="projects__project_id__users_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>[
+  {
+    id: 1,
+    name: &#39;aisensiy&#39;,
+    qualifications: [
+      {
+        capability: { id: 1 }
+      }
+    ]
+  }
+]
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_projects__project_id__users__user_id__evaluations"><span class="parent">/projects/{project_id}/users/{user_id}</span>/evaluations</a> <span class="methods"><a href="#projects__project_id__users__user_id__evaluations_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_projects__project_id__users__user_id__evaluations" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#projects__project_id__users__user_id__evaluations_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>capacity自己申请进行evaluation，capacity project主动assign evaluation给capacity</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="projects__project_id__users__user_id__evaluations_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/projects/{project_id}/users/{user_id}</span>/evaluations</h4></div><div class="modal-body"><div class="alert alert-info"><p>capacity自己申请进行evaluation，capacity project主动assign evaluation给capacity</p></div><ul class="nav nav-tabs"><li class="active"><a href="#projects__project_id__users__user_id__evaluations_post_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="projects__project_id__users__user_id__evaluations_post_request"><h3>URI Parameters</h3><ul><li><strong>project_id</strong>: <em>required (string)</em></li><li><strong>user_id</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  capability_id: 3
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_projects__project_id__users__user_id__evaluations__evaluation_id_"><span class="parent">/projects/{project_id}/users/{user_id}/evaluations</span>/{evaluation_id}</a> <span class="methods"><a href="#projects__project_id__users__user_id__evaluations__evaluation_id__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_projects__project_id__users__user_id__evaluations__evaluation_id_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#projects__project_id__users__user_id__evaluations__evaluation_id__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>获取request相关信息</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="projects__project_id__users__user_id__evaluations__evaluation_id__get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/projects/{project_id}/users/{user_id}/evaluations</span>/{evaluation_id}</h4></div><div class="modal-body"><div class="alert alert-info"><p>获取request相关信息</p></div><ul class="nav nav-tabs"><li class="active"><a href="#projects__project_id__users__user_id__evaluations__evaluation_id__get_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="projects__project_id__users__user_id__evaluations__evaluation_id__get_request"><h3>URI Parameters</h3><ul><li><strong>project_id</strong>: <em>required (string)</em></li><li><strong>user_id</strong>: <em>required (string)</em></li><li><strong>evaluation_id</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  id: 1,
+  uri: "/projects/1/users/1/evaluations/1",
+  commit_uri: "https://github.com/kiwiwin/abcd"
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_projects__project_id__users__user_id__evaluations__evaluation_id__result"><span class="parent">/projects/{project_id}/users/{user_id}/evaluations/{evaluation_id}</span>/result</a> <span class="methods"><a href="#projects__project_id__users__user_id__evaluations__evaluation_id__result_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_projects__project_id__users__user_id__evaluations__evaluation_id__result" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#projects__project_id__users__user_id__evaluations__evaluation_id__result_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>建康根据submission判断是否通过，同时可能产生qualification</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="projects__project_id__users__user_id__evaluations__evaluation_id__result_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/projects/{project_id}/users/{user_id}/evaluations/{evaluation_id}</span>/result</h4></div><div class="modal-body"><div class="alert alert-info"><p>建康根据submission判断是否通过，同时可能产生qualification</p></div><ul class="nav nav-tabs"><li class="active"><a href="#projects__project_id__users__user_id__evaluations__evaluation_id__result_post_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="projects__project_id__users__user_id__evaluations__evaluation_id__result_post_request"><h3>URI Parameters</h3><ul><li><strong>project_id</strong>: <em>required (string)</em></li><li><strong>user_id</strong>: <em>required (string)</em></li><li><strong>evaluation_id</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  status: "PASSED",
+  score: 80
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_projects__project_id__users__user_id__qualifications"><span class="parent">/projects/{project_id}/users/{user_id}</span>/qualifications</a> <span class="methods"><a href="#projects__project_id__users__user_id__qualifications_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_projects__project_id__users__user_id__qualifications" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#projects__project_id__users__user_id__qualifications_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>创建qualification？？？</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="projects__project_id__users__user_id__qualifications_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/projects/{project_id}/users/{user_id}</span>/qualifications</h4></div><div class="modal-body"><div class="alert alert-info"><p>创建qualification？？？</p></div><ul class="nav nav-tabs"><li class="active"><a href="#projects__project_id__users__user_id__qualifications_post_request" data-toggle="tab">Request</a></li><li><a href="#projects__project_id__users__user_id__qualifications_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="projects__project_id__users__user_id__qualifications_post_request"><h3>URI Parameters</h3><ul><li><strong>project_id</strong>: <em>required (string)</em></li><li><strong>user_id</strong>: <em>required (string)</em></li></ul><h3>Body</h3><p><strong>Type: application/x-www-form-urlencoded</strong></p><strong>Form Parameters</strong><ul><li><strong>capability_id</strong>: <em>(string)</em></li></ul></div><div class="tab-pane" id="projects__project_id__users__user_id__qualifications_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="authentication" class="panel-title">/authentication</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_authentication"><span class="parent"></span>/authentication</a> <span class="methods"><a href="#authentication_post"><span class="badge badge_post">post</span></a> <a href="#authentication_delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_authentication" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#authentication_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>login</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#authentication_delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>logout</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="authentication_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/authentication</h4></div><div class="modal-body"><div class="alert alert-info"><p>login</p></div><ul class="nav nav-tabs"><li class="active"><a href="#authentication_post_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="authentication_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><strong>Form Parameters</strong><ul><li><strong>user_name</strong>: <em>(string)</em></li><li><strong>user_password</strong>: <em>(string)</em></li></ul></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="authentication_delete"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent"></span>/authentication</h4></div><div class="modal-body"><div class="alert alert-info"><p>logout</p></div><ul class="nav nav-tabs"></ul><div class="tab-content"></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="users" class="panel-title">/users</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_users"><span class="parent"></span>/users</a> <span class="methods"><a href="#users_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_users" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#users_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>同步用户</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="users_post"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/users</h4></div><div class="modal-body"><div class="alert alert-info"><p>同步用户</p></div><ul class="nav nav-tabs"><li class="active"><a href="#users_post_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="users_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_users_current"><span class="parent">/users</span>/current</a> <span class="methods"><a href="#users_current_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_users_current" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#users_current_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>get current logged in user</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="users_current_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/users</span>/current</h4></div><div class="modal-body"><div class="alert alert-info"><p>get current logged in user</p></div><ul class="nav nav-tabs"><li><a href="#users_current_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane" id="users_current_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{ id: 1, name: &#39;shanchuan&#39; }
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_users__user_id__projects"><span class="parent">/users/{user_id}</span>/projects</a> <span class="methods"><a href="#users__user_id__projects_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_users__user_id__projects" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#users__user_id__projects_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>as a stack owner should get all the projects</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="users__user_id__projects_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/users/{user_id}</span>/projects</h4></div><div class="modal-body"><div class="alert alert-info"><p>as a stack owner should get all the projects</p></div><ul class="nav nav-tabs"><li class="active"><a href="#users__user_id__projects_get_request" data-toggle="tab">Request</a></li><li><a href="#users__user_id__projects_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="users__user_id__projects_get_request"><h3>URI Parameters</h3><ul><li><strong>user_id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="users__user_id__projects_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>[
+  {
+    id: 1,
+    name: &#39;webcenter&#39;
+  },
+  {
+    id: 2,
+    name: &#39;p2p&#39;
+  }
+]
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_users__user_id__evaluations"><span class="parent">/users/{user_id}</span>/evaluations</a> <span class="methods"><a href="#users__user_id__evaluations_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_users__user_id__evaluations" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#users__user_id__evaluations_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>capacity获取自己参加过的evaluation，以及每个evaluation的结果和状态</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="users__user_id__evaluations_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/users/{user_id}</span>/evaluations</h4></div><div class="modal-body"><div class="alert alert-info"><p>capacity获取自己参加过的evaluation，以及每个evaluation的结果和状态</p></div><ul class="nav nav-tabs"><li class="active"><a href="#users__user_id__evaluations_get_request" data-toggle="tab">Request</a></li><li><a href="#users__user_id__evaluations_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="users__user_id__evaluations_get_request"><h3>URI Parameters</h3><ul><li><strong>user_id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="users__user_id__evaluations_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>[
+  {
+    id: 1,
+    uri: "/projects/1/users/2/evaluations/1",
+    user: {
+      id: 2,
+      uri: "/users/2",
+    }
+    created_at: "2015-8-3",
+    status: "NEW"
+  },
+  {
+    id: 2,
+    uri: "/projects/1/users/2/evaluations/2",
+    user: {
+      id: 2,
+      uri: "/users/2",
+    }
+    created_at: "2015-8-3",
+    status: "FAILED"
+  },
+  {
+    id: 3,
+    uri: "/projects/1/users/2/evaluations/3",
+    user: {
+      id: 2,
+      uri: "/users/2",
+    }
+    created_at: "2015-8-3",
+    status: "SUCCESS"
+  }
+]
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_users__user_id__qualifications"><span class="parent">/users/{user_id}</span>/qualifications</a> <span class="methods"><a href="#users__user_id__qualifications_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_users__user_id__qualifications" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#users__user_id__qualifications_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>capacity获取自己已经拿到的qualifications</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="users__user_id__qualifications_get"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/users/{user_id}</span>/qualifications</h4></div><div class="modal-body"><div class="alert alert-info"><p>capacity获取自己已经拿到的qualifications</p></div><ul class="nav nav-tabs"><li class="active"><a href="#users__user_id__qualifications_get_request" data-toggle="tab">Request</a></li><li><a href="#users__user_id__qualifications_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="users__user_id__qualifications_get_request"><h3>URI Parameters</h3><ul><li><strong>user_id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="users__user_id__qualifications_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>[
+  {
+    id: 1,
+    uri: "/projects/1/users/2/qualifications/1",
+    user: {
+      id: 1,
+      uri: "/users/1",
+    }
+    created_at: "2015-8-5",
+    score: 80
+  },
+  {
+    id: 2,
+    uri: "/projects/1/users/2/qualifications/2",
+    user: {
+      id: 1,
+      uri: "/users/1",
+    }
+    created_at: "2015-8-5",
+    score: 86
+  }
+]
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#solutions">/solutions</a></li><li><a href="#stacks">/stacks</a></li><li><a href="#projects">/projects</a></li><li><a href="#authentication">/authentication</a></li><li><a href="#users">/users</a></li></ul></div></div></div></div></body></html>

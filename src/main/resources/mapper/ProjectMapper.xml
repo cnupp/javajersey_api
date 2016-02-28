@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tw.mapper.ProjectMapper">
+    <sql id="projectProps">
+        p.project_id as projectId,
+        p.name as projectName,
+        p.account as projectAccount
+    </sql>
+
+    <resultMap id="projectMap" type="com.tw.domain.Project">
+        <id property="id" column="projectId"/>
+        <result property="name" column="projectName"/>
+        <result property="account" column="projectAccount"/>
+    </resultMap>
+
+    <resultMap id="userMap" type="com.tw.domain.User">
+        <id property="id" column="userId"/>
+        <result property="name" column="userName"/>
+    </resultMap>
+
+    <resultMap id="userWithQualificationMap" type="com.tw.domain.User">
+        <id property="id" column="userId"/>
+        <result property="name" column="userName"/>
+        <collection property="qualifications" ofType="com.tw.domain.Qualification">
+            <id property="id" column="qualificationId" />
+            <result property="createdAt" column="qualificationCreatedAt" />
+            <association property="capability" javaType="com.tw.domain.Capability">
+                <id property="id" column="qualificationCapabilityId" />
+            </association>
+        </collection>
+    </resultMap>
+
+    <insert id="save">
+        insert into projects (project_id, name, account) values(#{map.id}, #{map.name}, #{map.account})
+    </insert>
+
+    <insert id="assignUser">
+        insert into assignments (project_id, user_id, starts_at, ends_at) values(#{projectId}, #{map.user_id}, #{map.starts_at}, #{map.ends_at})
+    </insert>
+
+    <select id="findById" resultMap="projectMap">
+        select <include refid="projectProps"/> from projects p where project_id = #{id}
+    </select>
+
+    <select id="findUserById" resultMap="userMap">
+        select
+          u.refId as userId,
+          u.name as userName
+          from assignments a
+          left join users u on u.refId = a.user_id
+          where a.project_id = #{projectId} and a.user_id = #{userId}
+    </select>
+
+    <select id="findUserProjects" resultMap="projectMap">
+      SELECT
+        <include refid="projectProps"/>
+        from users u
+        join assignments a on a.user_id = u.refId
+        left join projects p on p.project_id = a.project_id
+        where u.refId = #{userId};
+    </select>
+
+    <select id="findUsers" resultMap="userMap">
+        SELECT
+          u.name as userName,
+          u.refId as userId
+          from users u
+          join assignments a on a.user_id = u.refId
+          left join projects p on p.project_id = a.project_id
+          where p.project_id = #{projectId}
+    </select>
+    <resultMap id="assignmentMap" type="com.tw.domain.Assignment">
+        <id property="id" column="assignmentId"/>
+        <result property="startsAt" column="assignmentStartsAt"/>
+        <result property="endsAt" column="assignmentEndsAt"/>
+        <result property="userId" column="assignmentUserId"/>
+        <association property="project" resultMap="projectMap"/>
+    </resultMap>
+    <select id="findUserAssignments" resultMap="assignmentMap">
+      SELECT
+        <include refid="projectProps"/>,
+        a.id as assignmentId,
+        a.starts_at as assignmentStartsAt,
+        a.ends_at as assignmentEndsAt,
+        a.user_id as assignmentUserId
+        from users u
+        join assignments a on a.user_id = u.refId
+        left join projects p on p.project_id = a.project_id
+        where u.refId = #{userId};
+    </select>
+</mapper>

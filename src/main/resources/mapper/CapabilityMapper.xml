@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tw.mapper.CapabilityMapper">
+    <resultMap id="capabilityMap" type="com.tw.domain.Capability">
+        <id property="id" column="capabilityId"/>
+        <result property="projectId" column="capabilityProjectId"/>
+        <result property="createdAt" column="capabilityCreatedAt"/>
+        <result property="deprecatedAt" column="capabilityDeprecatedAt"/>
+        <result property="projectName" column="projectName"/>
+        <association property="solution" javaType="com.tw.domain.Solution">
+            <id property="id" column="solutionId"/>
+            <result property="name" column="solutionName"/>
+            <result property="description" column="solutionDescription"/>
+            <result property="createdAt" column="solutionCreatedAt"/>
+        </association>
+        <association property="stack" resultMap="com.tw.mapper.StackRepository.stackMap"/>
+    </resultMap>
+
+    <insert id="save" keyProperty="map.id">
+      insert into capabilities (solution_id, stack_id, project_id) values (#{map.solution_id}, #{map.stack_id}, #{projectId})
+    </insert>
+    <update id="deprecate">
+        update capabilities set deprecated_at = CURRENT_TIMESTAMP where id = #{capability.id}
+    </update>
+    <sql id="capabilityProps">
+        c.id as capabilityId,
+        c.project_id as capabilityProjectId,
+        c.created_at as capabilityCreatedAt,
+        c.deprecated_at as capabilityDeprecatedAt
+    </sql>
+    <sql id="solutionProps">
+        so.id as solutionId,
+        so.name as solutionName,
+        so.description as solutionDescription,
+        so.created_at as solutionCreatedAt
+    </sql>
+    <sql id="stackProps">
+        st.id as stackId,
+        st.name as stackName,
+        st.description as stackDescription
+    </sql>
+    <sql id="serviceProps">
+        se.id as serviceId,
+        se.name as serviceName,
+        se.image_url as serviceImageUrl
+    </sql>
+
+    <sql id="capabilitySql">
+        select
+        <include refid="capabilityProps"/>,
+        <include refid="solutionProps"/>,
+        <include refid="stackProps"/>,
+        <include refid="serviceProps"/>
+        from capabilities c
+        left join solutions so on c.solution_id = so.id
+        left join stacks st on c.stack_id = st.id
+        left join stack_services ss on ss.stack_id = so.id
+        left join services se on se.id = ss.service_id
+    </sql>
+
+    <select id="findById" resultMap="capabilityMap">
+        <include refid="capabilitySql"/>
+        where c.id = #{capabilityId} and c.project_id = #{projectId}
+    </select>
+
+    <select id="find" resultMap="capabilityMap">
+        <include refid="capabilitySql"/>
+        where c.project_id = #{projectId}
+        <if test="includeDeprecated == false">
+            AND deprecated_at is NULL
+        </if>
+    </select>
+</mapper>

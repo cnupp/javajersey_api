@@ -1,0 +1,1 @@
+ALTER TABLE qualifications ADD COLUMN score INTEGER;

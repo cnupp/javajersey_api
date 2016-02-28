@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tw.mapper.StackRepository">
+    <resultMap id="stackMap" type="com.tw.domain.Stack">
+        <id property="id" column="stackId"/>
+        <result property="name" column="stackName"/>
+        <result property="description" column="stackDescription"/>
+        <collection property="services" resultMap="serviceMap"/>
+    </resultMap>
+
+    <resultMap id="refStackMap" type="com.tw.domain.Stack">
+        <id property="id" column="stackId"/>
+        <result property="name" column="stackName"/>
+        <result property="description" column="stackDescription"/>
+    </resultMap>
+    <resultMap id="serviceMap" type="com.tw.domain.Service">
+        <id property="id" column="serviceId"/>
+        <result property="name" column="serviceName"/>
+        <result property="imageUrl" column="serviceImageUrl"/>
+    </resultMap>
+    <insert id="create" keyProperty="primaryKey.id">
+        insert into stacks (name, description) values (#{map.name}, #{map.description});
+        SET @LAST_INSERT_STACK_ID = LAST_INSERT_ID();
+        <foreach collection="map.services" item="item">
+            insert into stack_services (stack_id, service_id) VALUES (@LAST_INSERT_STACK_ID, #{item});
+        </foreach>
+        SET @LAST_INSERT_STACK_ID = NULL
+    </insert>
+
+    <sql id="stackSelect">
+      select
+        s.id as stackId,
+        s.name as stackName,
+        s.description as stackDescription,
+        se.id as serviceId,
+        se.name as serviceName,
+        se.image_url as serviceImageUrl
+        from stacks s
+        left join stack_services ss on ss.stack_id = s.id
+        left join services se on se.id = ss.service_id
+    </sql>
+
+    <select id="getStacks" resultMap="stackMap">
+        <include refid="stackSelect"/>
+    </select>
+
+    <select id="getStackById" resultMap="stackMap">
+        <include refid="stackSelect"/>
+        WHERE s.id = #{stackId}
+    </select>
+</mapper>

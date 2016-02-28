@@ -26,5 +26,13 @@
         </environment>
     </environments>
     <mappers>
+        <mapper resource="mapper/ProjectMapper.xml"/>
+        <mapper resource="mapper/CapabilityMapper.xml"/>
+        <mapper resource="mapper/StackRepository.xml"/>
+        <mapper resource="mapper/SolutionRepository.xml"/>
+        <mapper resource="mapper/EvaluationMapper.xml"/>
+        <mapper resource="mapper/QualificationMapper.xml"/>
+        <mapper resource="mapper/UserRepository.xml"/>
+        <mapper resource="mapper/ServiceMapper.xml"/>
     </mappers>
 </configuration>

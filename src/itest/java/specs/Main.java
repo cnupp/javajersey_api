@@ -49,7 +49,7 @@ public class Main {
 
     private long calculateTimeCost(Properties properties) {
         Long first_commit_time = Long.valueOf(properties.get("first_commit") + "");
-        Date startTime = new Date(first_commit_time);
+        Date startTime = new Date(first_commit_time * 1000);
         Date endTime = new Date();
         return (endTime.getTime() - startTime.getTime()) / 1000;
     }

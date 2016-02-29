@@ -29,7 +29,7 @@ public class RequestHelper {
     public String login() {
         Form form = new Form();
         form.param("user_name", "bg");
-        final Response response = post("/authentication", null, form);
+        final Response response = post("/authentication", "", form);
         return response.getHeaderString("Set-Cookie");
     }
 

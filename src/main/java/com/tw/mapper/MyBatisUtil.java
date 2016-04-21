@@ -23,9 +23,10 @@ public class MyBatisUtil {
             inputStream = Resources.getResourceAsStream(resource);
             Properties properties = new Properties();
             String connectURL = String.format(
-                    "jdbc:mysql://%s:%s/ke_tsu?user=%s&password=%s&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull",
+                    "jdbc:mysql://%s:%s/%s?user=%s&password=%s&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull",
                     System.getenv().getOrDefault("DB_HOST", "127.0.0.1"),
                     System.getenv().getOrDefault("DB_PORT", "3307"),
+                    System.getenv().getOrDefault("DB_NAME", "data_store"),
                     System.getenv().getOrDefault("DB_USERNAME", "mysql"),
                     System.getenv().getOrDefault("DB_PASSWORD", "mysql")
             );

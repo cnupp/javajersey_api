@@ -5,8 +5,6 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.tw.api.exception.NotFoundExceptionMapper;
 import com.tw.api.exception.PathNotFoundExceptionHMapper;
-import com.tw.api.filter.AuthenticationFilter;
-import com.tw.api.filter.CORSResponseFilter;
 import com.tw.session.SessionFeature;
 import com.tw.session.core.SessionIdGenerator;
 import com.tw.session.core.SessionStorage;
@@ -34,7 +32,6 @@ public class ApplicationResourceConfig extends ResourceConfig {
         register(SessionFeature.class);
         register(NotFoundExceptionMapper.class);
         register(PathNotFoundExceptionHMapper.class);
-        register(CORSResponseFilter.class);
         register(new AbstractBinder() {
             @Override
             protected void configure() {
@@ -42,7 +39,6 @@ public class ApplicationResourceConfig extends ResourceConfig {
                 bind(new RedisSessionStorage("127.0.0.1")).to(SessionStorage.class);
             }
         });
-        register(AuthenticationFilter.class);
     }
 
     private void bridge(ServiceLocator serviceLocator, Injector injector) {

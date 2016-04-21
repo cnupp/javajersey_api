@@ -2,8 +2,6 @@ package com.tw;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
-import com.tw.domain.ProjectRepository;
-import com.tw.domain.impl.ProjectRepositoryImpl;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
@@ -49,9 +47,10 @@ public class Models extends AbstractModule {
         this.classPathResource = classPathResource;
         this.properties = properties;
         String connectURL = String.format(
-                "jdbc:mysql://%s:%s/ke_tsu?user=%s&password=%s&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull",
+                "jdbc:mysql://%s:%s/%s?user=%s&password=%s&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull",
                 System.getenv().getOrDefault("DB_HOST", "127.0.0.1"),
                 System.getenv().getOrDefault("DB_PORT", "3307"),
+                System.getenv().getOrDefault("DB_NAME", "ke_tsu"),
                 System.getenv().getOrDefault("DB_USERNAME", "mysql"),
                 System.getenv().getOrDefault("DB_PASSWORD", "mysql")
         );
@@ -61,7 +60,6 @@ public class Models extends AbstractModule {
     @Override
     protected void configure() {
         bindPersistence();
-        bind(ProjectRepository.class).to(ProjectRepositoryImpl.class);
     }
 
     private void bindPersistence() {

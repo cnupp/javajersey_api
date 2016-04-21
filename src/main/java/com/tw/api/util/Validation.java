@@ -1,7 +1,5 @@
 package com.tw.api.util;
 
-import com.tw.domain.User;
-
 import java.util.Map;
 
 public class Validation {
@@ -12,14 +10,6 @@ public class Validation {
             }
         }
         return true;
-    }
-
-    public static boolean notYourself(Map<String, Object> userMap, User user) {
-        return user.getId() != Long.valueOf(userMap.get("id").toString());
-    }
-
-    public static boolean validateEvaluationResult(Map<String, Object> map) {
-        return allExists(map, "status", "score") && map.get("score").toString().matches("\\d+");
     }
 
     public static boolean validateCreateCapability(Map<String, Object> map) {

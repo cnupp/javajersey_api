@@ -3,8 +3,9 @@ package specs.util;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Form;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RequestHelper {
     Client client;
@@ -19,22 +20,23 @@ public class RequestHelper {
         return path.startsWith("http") ? path : (entryPoint + path);
     }
 
-    public Response post(String uri, String cookie, Form form) {
-        return client.target(getUrl(uri))
-                .request()
-                .header("Cookie", cookie)
-                .post(Entity.form(form));
-    }
-
     public String login() {
-        Form form = new Form();
-        form.param("user_name", "bg");
-        final Response response = post("/authentication", "", form);
+        Map<String, Object> info = new HashMap<>();
+        info.put("user_name", "admin");
+        final Response response = client.target(getUrl("/authentication"))
+                .request()
+                .header("Cookie", "")
+                .header("Content-Type", "application/json")
+                .post(Entity.json(info));
         return response.getHeaderString("Set-Cookie");
     }
 
-    public boolean submitResult(String resultUrl, String cookie, Form form) {
-        int status = post(resultUrl, cookie, form).getStatus();
+    public boolean submitResult(String resultUrl, String cookie, Map<String, Object> form) {
+        int status = client.target(getUrl(resultUrl))
+                .request()
+                .header("Cookie", cookie)
+                .header("Content-Type", "application/json")
+                .put(Entity.json(form)).getStatus();
         System.out.println("Submit Response Status Code is" + status);
         return status == 200;
     }

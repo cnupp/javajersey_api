@@ -4,10 +4,11 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import specs.util.RequestHelper;
 
-import javax.ws.rs.core.Form;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class Main {
@@ -35,12 +36,14 @@ public class Main {
             requestHelper.login();
             String cookie = requestHelper.login();
             long timeCost = calculateTimeCost(properties);
-            Form form = new Form();
-            form.param("status", exitCode == 0 ? "PASSED" : "FAILED");
-            form.param("score", timeCost + "");
+
+            Map<String, Object> result = new HashMap<String, Object>() {{
+                put("status", exitCode == 0 ? "PASSED" : "FAILED");
+                put("time", timeCost + "");
+            }};
 
             String evaluation_uri = properties.get("evaluation_uri").toString();
-            if (!requestHelper.submitResult(evaluation_uri, cookie, form)) {
+            if (!requestHelper.submitResult(evaluation_uri, cookie, result)) {
                 System.err.println("Commit Evaluation Result Failed");
             }
         }
@@ -49,7 +52,7 @@ public class Main {
 
     private long calculateTimeCost(Properties properties) {
         Long first_commit_time = Long.valueOf(properties.get("first_commit") + "");
-        Date startTime = new Date(first_commit_time * 1000);
+        Date startTime = new Date(first_commit_time);
         Date endTime = new Date();
         return (endTime.getTime() - startTime.getTime()) / 1000;
     }

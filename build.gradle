@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurper
+
 ext {
     group = 'tw'
     version = "1.0.0"
@@ -110,6 +112,19 @@ task standaloneJar(type: Jar, dependsOn: jar) {
 
 
 task itestJar(type: Jar, dependsOn: jar) {
+    def jsonSlurper = new JsonSlurper()
+    File configFile = file('manifest.json')
+    if (configFile.exists()) {
+        def object = jsonSlurper.parse(configFile)
+        File propertiesFile = file('src/itest/resources/meta.properties')
+        propertiesFile.write(String.format(
+                "entry_point=%s\nevaluation_uri=%s\nfirst_commit=%s",
+                object.entry_point,
+                object.evaluation_uri,
+                object.first_commit
+        ))
+    }
+
     baseName = "verify"
     classifier = "standalone"
     version = ""

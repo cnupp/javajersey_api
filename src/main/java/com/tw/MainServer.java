@@ -15,8 +15,6 @@ import org.glassfish.jersey.server.spi.Container;
 import org.glassfish.jersey.server.spi.ContainerLifecycleListener;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
-import redis.embedded.RedisServer;
-import redis.embedded.RedisServerBuilder;
 
 import javax.inject.Inject;
 import javax.ws.rs.core.Application;
@@ -32,11 +30,6 @@ import static org.jvnet.hk2.guice.bridge.api.GuiceBridge.getGuiceBridge;
 
 public class MainServer {
     public static void main(String[] args) throws IOException {
-        RedisServer redisServer = new RedisServerBuilder()
-                .port(6379)
-//                .setting("maxheap 256mb")
-                .build();
-        redisServer.start();
 
         System.out.printf("Start Server...");
         WebappContext context = new WebappContext("Stacks", "/");

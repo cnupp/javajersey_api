@@ -1,8 +1,6 @@
 package com.tw.support;
 
 import com.tw.session.core.Session;
-import com.tw.util.Json;
-import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.servlet.ServletRegistration;
 import org.glassfish.grizzly.servlet.WebappContext;
@@ -24,8 +22,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.script.ScriptEngine;
-import javax.script.ScriptException;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
@@ -136,22 +132,6 @@ public class ApiSupport {
         return request.header("Authorization", token);
     }
 
-    protected static Map<String, Object> transform(String jsonString) {
-        ScriptEngine scriptEngine = new NashornScriptEngineFactory().getScriptEngine();
-        String stringifyScript = "function stringify(jsonString) {var result = eval(jsonString); return JSON.stringify(result);} stringify(" + jsonString + ")";
-
-        try {
-            return (Map<String, Object>) scriptEngine.eval("JSON.parse('" + String.valueOf(scriptEngine.eval(stringifyScript)) + "');");
-        } catch (ScriptException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-    }
-
-    protected static Map<String, Object> copy(Map<String, Object> src) {
-        return Json.fromJson(Json.toJson(src));
-    }
-
     public static class TestContainerFactory implements org.glassfish.jersey.test.spi.TestContainerFactory {
         private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(TestContainerFactory.class.getName());
         private ResourceConfig resourceConfig;
@@ -169,7 +149,6 @@ public class ApiSupport {
             private final URI baseUri;
             private HttpServer server;
             private static final Logger logger = LoggerFactory.getLogger(TestContainer.class.getName());
-//            private RedisServer redisServer;
 
             private TestContainer(URI baseUri, ResourceConfig resourceConfig) {
                 this.baseUri = baseUri;
@@ -198,8 +177,6 @@ public class ApiSupport {
             public void start() {
                 logger.info("Starting JettyTestContainer...");
                 try {
-//                    redisServer = new RedisServerBuilder().port(6379).build();
-//                    redisServer.start();
                     server.start();
                 } catch (Exception e) {
                     throw new TestContainerException(e);
@@ -211,7 +188,6 @@ public class ApiSupport {
                 logger.info("Stopping TestContainer...");
                 try {
                     this.server.shutdownNow();
-//                    redisServer.stop();
                 } catch (Exception ex) {
                     logger.info("Error Stopping TestContainer...", ex);
                 }

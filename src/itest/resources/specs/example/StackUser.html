@@ -1,0 +1,23 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<link href="../../concordion.css" rel="stylesheet" type="text/css" />
+<body>
+
+    <h1>Stack User Flow in Exam System</h1>
+    <div class="example">
+        <h3>As a stack user, after login you will see profile information:</h3>
+        <span concordion:execute="importUser()"></span><br />
+        <table concordion:verifyRows="#user : getProfile()">
+            <tr>
+                <th concordion:assertEquals="#user.username">User Name</th>
+                <th concordion:assertEquals="#user.email">Email</th>
+            </tr>
+            <tr><td>scxu</td><td>scxu@thoughtworks.com</td></tr>
+        </table>
+    </div>
+
+    <div class="example">
+        <span concordion:execute="assignUserToProject()"></span><br />
+        <h3>Besides, you will also see that you are assigned on project <span concordion:assertEquals="getAssignedProjectName()">CMS</span>.</h3>
+    </div>
+</body>
+</html>

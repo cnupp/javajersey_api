@@ -1,0 +1,52 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+<link href="../../concordion.css" rel="stylesheet" type="text/css" />
+<body>
+
+    <h1>Project Manager Flow in Exam System</h1>
+    <div class="example">
+        <h3>Project manager can import user into the Exam System with the following information:</h3>
+        <p>
+            User Id: <span concordion:set="#user_id">123123</span> <br />
+            User Name: <span concordion:set="#user_name">scxu</span> <br />
+            Email: <span concordion:set="#email">scxu@thoughtworks.com</span> <br />
+            The response status code should be
+            <b concordion:assertEquals="importUser(#user_id, #user_name, #email)">201</b>
+        </p>
+    </div>
+
+    <div class="example">
+        <h3>
+            For user <span concordion:set="#username">admin</span>,
+            you can import a new project with following information
+            <span concordion:execute="setLoginUser(#username)" />
+        </h3>
+        <p>
+            <span concordion:execute="#project_id = uniqueProjectId()"></span><br />
+            Project Id: <span concordion:echo="#project_id"></span> <br />
+            Project Name: <span concordion:set="#project_name">CMS</span> <br />
+            Project Account: <span concordion:set="#account_name">ThoughtWorks</span><br/>
+            The response status code should be
+            <b concordion:assertEquals="importNewProject(#project_id, #project_name, #account_name)">201</b>
+            , which indicates a new project is created successfully.
+        </p>
+    </div>
+
+    <div class="example">
+        <h3>
+            After importing a new project, then you can assign <span concordion:set="#user_name">scxu</span> to this project.
+        </h3>
+        <p>
+            Assign an existing user with<br/>
+            User Id: <span concordion:set="#user_id">123123</span> <br />
+            User Name: <span concordion:echo="#user_name"></span> <br />
+            Assign Period: From <span concordion:set="#start">2015-10-08</span> to
+            <span concordion:set="#end">2015-12-16</span> <br />
+            The response status code should be:
+            <span concordion:assertEquals="addNewMember(#user_id, #start, #end, #project_id)">200</span>
+            , which indicates the member is assigned to the project successfully.
+
+        </p>
+    </div>
+
+</body>
+</html>

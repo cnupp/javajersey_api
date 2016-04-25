@@ -1,0 +1,400 @@
+#%RAML 0.8
+
+title: ke-tsu raml
+mediaType: application/json
+
+/stacks:
+  post:
+    description: import stack
+    body:
+      application/json:
+        example: |
+          {
+            "id": "xxx",
+            "name": "xxx"
+          }
+    responses:
+      201:
+      400:
+  get:
+    description: list stacks
+    responses:
+      200:
+  /{stack_id}:
+    get:
+      description: get one stack
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "id": "xxx",
+                  "name": "javajersey",
+                  "links": [
+                    {
+                      "rel": "self",
+                      "uri": "http://ketsu.com/stacks/xxx"
+                    }
+                  ]
+                }
+        404:
+/solutions:
+  post:
+    description: import solution
+    body:
+      application/json:
+        example: |
+          {
+            "id": "xxx",
+            "name": "xxx"
+          }
+    responses:
+      201:
+      400:
+  get:
+    description: list solutions
+    responses:
+      200:
+  /{solution_id}:
+    get:
+      description: show one solution info
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "id": "bla",
+                  "name": "open-api",
+                  "description": "bla",
+                  "links": [
+                    {
+                      "rel": "self",
+                      "uri": "http://ketsu.com/solutions/bla"
+                    }
+                  ]
+                }
+        404:
+/capabilities:
+  post:
+    description: create cap by solution and stack
+    body:
+      application/json:
+        example: |
+          {
+            "stack": {
+              "id": "xx",
+              "name": "xx"
+            },
+            "solution": {
+              "id": "xx",
+              "name": "xx"
+            },
+            "links": [
+              {
+                "rel": "self",
+                "uri": "xxx"
+              }
+            ]
+          }
+    responses:
+      201:
+      400:
+  get:
+    description: list all capabilities
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "solution": {
+                    "id": "xxx",
+                    "name": "open-api"
+                  },
+                  "stack": {
+                    "id": "blabla",
+                    "name": "javajersey"
+                  }
+                }
+              ]
+  /{capability_id}:
+    get:
+      description: get one capability
+      responses:
+        200:
+        404:
+    /exampapers:
+      post:
+        description: create new exam paper
+        body:
+          application/json:
+            example: |
+              {
+                "name": "",
+                "repository_url": "xx"
+              }
+      get:
+        description: list all exam papers
+      /{exam_paper_id}:
+        get:
+          description: get one paper
+/users:
+  post:
+    description: import user info
+    body:
+      application/json:
+        example: |
+          {
+            "id": 123123,
+            "username": "scxu",
+            "email": "scxu@thoughtworks.com"
+          }
+    responses:
+      201:
+      400:
+  /{user_id}:
+    get:
+      description: get user info
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "username": "scxu",
+                  "email": "",
+                  "links": [
+
+                  ]
+                }
+    /projects:
+      get:
+        description: get user's current projects
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  [
+                    {
+                      "name": "xx",
+                      "from": "",
+                      "to": ""
+                    }
+                  ]
+    /evaluations:
+      get:
+        description: list all evaluations
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  {
+                    "count": 1,
+                    "self": "/apps/ketsu/builds?page=1&per_page=30",
+                    "first": "/apps/ketsu/builds?page=1&per_page=30",
+                    "last": "/apps/ketsu/builds?page=1&per_page=30",
+                    "prev": null,
+                    "next": null,
+                    "items": [
+                      {
+                        "created": "1451953908",
+                        "capability": {
+                          "id": "xxx"
+                        },
+                        "exampaper": {
+                          "repo": "",
+                          "name": ""
+                        },
+                        "links": [
+                          {
+                            "rel": "self",
+                            "uri": "/apps/ketsu/builds/1a5abd6c-49b6-4c6a-b47c-d75fedec0a45"
+                          },
+                          {
+                            "rel": "app",
+                            "uri": "/apps/ketsu"
+                          },
+                          {
+                            "rel": "verifies",
+                            "uri": "/apps/ketsu/builds/1a5abd6c-49b6-4c6a-b47c-d75fedec0a45/verifies"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+      post:
+        description: create new eval
+        body:
+          application/json:
+            example: |
+              {
+                "capability": "id"
+              }
+      /{eval_id}:
+        get:
+          description: get eval detail
+        put:
+          description: update eval result
+          body:
+            application/json:
+              example: |
+                {
+                  "status": "xxx",
+                  "time": 120
+                }
+    /certs:
+      get:
+        description: list
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  [
+                    {
+                      "id": "",
+                      "created_at": "",
+                      "capability": {
+                        "solution": {
+                          "id": "xxx",
+                          "name": "open-api"
+                        },
+                        "stack": {
+                          "id": "blabla",
+                          "name": "javajersey"
+                        }
+                      },
+                      "links": [
+                        {
+                          "rel": "",
+                          "uri": ""
+                        }
+                      ]
+                    }
+                  ]
+      post:
+        description: create cert
+        body:
+          application/json:
+            example: |
+              {
+                "capability": "xxx"
+                "score": 123
+              }
+      /{cert_id}:
+        get:
+          description: get one cert detail
+
+/projects:
+  post:
+    description: import project
+  /{project_id}:
+    get:
+      description: get project info
+    /capability-history:
+      get:
+        description: list history of capabilities in project
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  [
+                    {
+                      "id": "xxx",
+                      "type": "xxx",
+                      "content": {
+                        "capability": {
+
+                        }
+                      },
+                      "created_at": "xxx"
+                    }
+                  ]
+    /capabilities:
+      get:
+        description: list current project's capabilities
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  [
+                    {
+                      "solution": {
+                        "id": "xxx",
+                        "name": "open-api"
+                      },
+                      "stack": {
+                        "id": "blabla",
+                        "name": "javajersey"
+                      },
+                      "created_at": 123,
+                      "links": [
+                        {
+                          "rel": "",
+                          "uri": ""
+                        }
+                      ]
+                    }
+                  ]
+      post:
+        description: create demand for capability in this project
+        body:
+          application/json:
+            example: |
+              {
+                "capability": "xxx"
+              }
+      /{project_capability_id}:
+        delete:
+          description: deprecate a capability
+    /members:
+      delete:
+        description: shortcut for remove all members in project
+      get:
+        description: list memebers of current project including user's certs
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  [
+                    {
+                      "name": "xxx",
+                      "id": "xxx",
+                      "certificates": [
+                        {
+                          "capability": {
+                            "solution": {
+                              "id": "xxx",
+                              "name": "open-api"
+                            },
+                            "stack": {
+                              "id": "blabla",
+                              "name": "javajersey"
+                            }
+                          },
+                          "created_at": "xxx",
+                          "score": 123
+                        }
+                      ]
+                    }
+                  ]
+
+      post:
+        description: assign user to current project
+        body:
+          application/json:
+            example: |
+              {
+                "user": "xxx"
+              }
+      /{user_id}:
+        delete:
+          description: unassign from project

@@ -4,20 +4,19 @@
 
     <h1>Stack User Flow in Exam System</h1>
     <div class="example">
+        <span concordion:execute="#user_id = uniqueUserId()"></span><br />
         <h3>As a stack user, after login you will see profile information:</h3>
-        <span concordion:execute="importUser()"></span><br />
-        <table concordion:verifyRows="#user : getProfile()">
-            <tr>
-                <th concordion:assertEquals="#user.username">User Name</th>
-                <th concordion:assertEquals="#user.email">Email</th>
-            </tr>
-            <tr><td>scxu</td><td>scxu@thoughtworks.com</td></tr>
-        </table>
+        <span concordion:execute="importUser(#user_id)"></span><br />
+        <p>
+            <span concordion:execute="#user=getProfile(#user_id)"></span><br />
+            User Id: <span concordion:echo="#user.id"></span><br/>
+            User Name: <span concordion:assertEquals="#user.name">scxu</span> <br />
+        </p>
     </div>
 
     <div class="example">
-        <span concordion:execute="assignUserToProject()"></span><br />
-        <h3>Besides, you will also see that you are assigned on project <span concordion:assertEquals="getAssignedProjectName()">CMS</span>.</h3>
+        <span concordion:execute="assignUserToProject(#user_id)"></span><br />
+        <h3>Besides, you will also see that you are assigned on project <span concordion:assertEquals="getAssignedProjectName(#user_id)">CMS</span>.</h3>
     </div>
 </body>
 </html>

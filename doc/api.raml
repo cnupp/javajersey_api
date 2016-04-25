@@ -15,7 +15,21 @@ mediaType: application/json
           }
     responses:
       201:
+        headers:
+          Location:
+            type: string
+            example: http://xxx.com/stacks/xxx
       400:
+        description: Bad Request
+        body:
+          application/json:
+            example: |
+              {
+                "error": {
+                    "code": "40001",
+                    "message": "Stack already exist"
+                }
+              }
   get:
     description: list stacks
     responses:
@@ -283,7 +297,7 @@ mediaType: application/json
           application/json:
             example: |
               {
-                "capability": "xxx"
+                "capability": "xxx",
                 "score": 123
               }
       /{cert_id}:
@@ -293,9 +307,45 @@ mediaType: application/json
 /projects:
   post:
     description: import project
+    body:
+      application/json:
+        example: |
+          {
+            "id": "xxx",
+            "name": "P2P",
+            "account": "ThoughtWorks"
+          }
+    responses:
+        201:
+          headers:
+            Location:
+              type: string
+              example: http://xxx.com/projects/xxx
+        400:
+          description: Bad Request
+          body:
+            application/json:
+              example: |
+                {
+                  "error": {
+                      "code": "40001",
+                      "message": "Project already exits"
+                  }
+                }
   /{project_id}:
     get:
       description: get project info
+      responses:
+        200:
+          body:
+            example: |
+              {
+                "id": "xxx",
+                "name": "P2P",
+                "account": "ThoughtWorks",
+              }
+        404:
+          description: Project not found
     /capability-history:
       get:
         description: list history of capabilities in project
@@ -395,6 +445,23 @@ mediaType: application/json
               {
                 "user": "xxx"
               }
+        responses:
+          201:
+            headers:
+              Location:
+                type: string
+                example: http://xxx.com/projects/xxx/members/xxx
+          400:
+            description: Bad Request
+            body:
+              application/json:
+                example: |
+                  {
+                    "error": {
+                        "code": "40001",
+                        "message": "User doesn't exist"
+                    }
+                  }
       /{user_id}:
         delete:
           description: unassign from project

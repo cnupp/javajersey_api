@@ -24,8 +24,10 @@ public class ConcordionBaseTest {
 
     public String getUrl(String path) {
         String entryPoint = System.getenv("ENTRYPOINT") != null ?
-                System.getenv("ENTRYPOINT") : "http://localhost:8088";
-        return entryPoint + path;
+                System.getenv("ENTRYPOINT") : "localhost:8088";
+        if (entryPoint.startsWith("http"))
+            return entryPoint + path;
+        return "http://" + entryPoint + path;
     }
 
     public Response get(String uri, String cookie){

@@ -8,8 +8,8 @@ import org.junit.runner.RunWith;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Form;
 import javax.ws.rs.core.Response;
+import java.util.Map;
 
 @RunWith(ConcordionRunner.class)
 @Ignore
@@ -35,11 +35,11 @@ public class ConcordionBaseTest {
                 .get();
     }
 
-    public Response post(String uri, String cookie, Form form) {
+    public Response post(String uri, String cookie, Map<String, Object> json) {
         return client.target(getUrl(uri))
                 .request()
                 .header("Cookie", cookie)
-                .post(Entity.form(form));
+                .post(Entity.json(json));
     }
 
     public Response delete(String uri, String cookie) {

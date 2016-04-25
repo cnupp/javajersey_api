@@ -3,9 +3,9 @@ package specs.example;
 import org.concordion.integration.junit4.ConcordionRunner;
 import org.junit.runner.RunWith;
 
-import javax.ws.rs.core.Form;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,20 +17,26 @@ public class StackUserTest extends ConcordionBaseTest{
     String email="scxu@thoughtworks.com";
 
     public String importUser() {
-        Form form = new Form();
-        form.param("id", userId);
-        form.param("name", username);
-        form.param("email", email);
-        final Response response = post("/users", cookie, form);
+        Map<String, Object> userInfo = new HashMap<String, Object>() {{
+            put("id", userId);
+            put("email", email);
+            put("name", username);
+            put("role", "DEV");
+        }};
+
+        final Response response = post("/users", cookie, userInfo);
         return response.getStatus() + "";
     }
 
     private String importNewProject(String id, String name, String account) {
-        Form form = new Form();
-        form.param("name", name);
-        form.param("id", id);
-        form.param("account", account);
-        final Response response = post("/projects", cookie, form);
+
+        Map<String, Object> projectMap = new HashMap<String, Object>() {{
+            put("id", id);
+            put("name", name);
+            put("account", account);
+        }};
+
+        final Response response = post("/projects", cookie, projectMap);
 
         return response.getStatus() + "";
     }
@@ -39,11 +45,11 @@ public class StackUserTest extends ConcordionBaseTest{
         final String projectId = "1024";
         importNewProject(projectId, "CMS", "ThoughtWorks");
 
-        Form form = new Form();
-        form.param("user_id", userId);
-        form.param("starts_at", "2016-04-03");
-        form.param("ends_at", "2016-08-03");
-        post("/projects/" + projectId + "/users", cookie, form);
+        Map<String, Object> param = new HashMap<String, Object>() {{
+            put("user", userId);
+        }};
+
+        post("/projects/" + projectId + "/users", cookie, param);
     }
 
     public String getAssignedProjectName() {

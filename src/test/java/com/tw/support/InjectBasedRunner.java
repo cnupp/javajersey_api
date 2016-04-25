@@ -61,9 +61,20 @@ public class InjectBasedRunner extends BlockJUnit4ClassRunner {
 
     private List<AbstractModule> getAbstractModules() {
         Properties properties = new Properties();
-        final String connectURL = String.format(
-                "%s&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull",
-                System.getenv().getOrDefault("DATABASE", "jdbc:mysql://localhost:3307/music?user=mysql&password=mysql"));
+        String host = System.getenv().getOrDefault("DB_HOST", "127.0.0.1");
+        String port = System.getenv().getOrDefault("DB_PORT", "3307");
+        String databaseName = System.getenv().getOrDefault("DB_NAME", "data_store");
+        String username = System.getenv().getOrDefault("DB_USERNAME", "mysql");
+        String password = System.getenv().getOrDefault("DB_PASSWORD", "mysql");
+        String connectURL = String.format(
+                "jdbc:mysql://%s:%s/%s?user=%s&password=%s&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull",
+                host,
+                port,
+                databaseName,
+                username,
+                password
+        );
+
         properties.setProperty("db.url", connectURL);
         List<AbstractModule> modules = new ArrayList<>(asList(new AbstractModule[]{
                 new Models("development", properties),

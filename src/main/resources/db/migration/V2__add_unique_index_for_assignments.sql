@@ -1,1 +1,0 @@
-ALTER TABLE `assignments` ADD UNIQUE `unique_index`(`user_id`, `project_id`);

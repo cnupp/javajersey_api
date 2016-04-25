@@ -1,7 +1,7 @@
 package com.tw.session.util;
 
+
 import com.tw.session.core.SessionStorage;
-import com.tw.session.impl.Session;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Cookie;
@@ -18,6 +18,6 @@ public class Util {
             return null;
         }
 
-        return new Session(sessionCookie.getValue(), false, sessionStorage);
+        return new com.tw.session.impl.Session(sessionCookie.getValue(), false, sessionStorage);
     }
 }

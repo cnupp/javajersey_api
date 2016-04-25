@@ -1,1 +1,0 @@
-ALTER TABLE capabilities ADD COLUMN deprecated_at TIMESTAMP NULL DEFAULT NULL;

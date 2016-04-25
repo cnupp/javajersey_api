@@ -1,5 +1,7 @@
 package com.tw.session.impl;
 
+import com.tw.session.core.Session;
+
 import javax.inject.Provider;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;
@@ -18,7 +20,7 @@ public class SessionFilter implements ContainerResponseFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
-        com.tw.session.core.Session session = this.sessionProvider.get();
+        Session session = this.sessionProvider.get();
         if (session.isNew()) {
             NewCookie newCookie = new NewCookie(SessionFactory.SESSION_IDENTIFIER, session.getSessionKey(), "/", "", "", -1, false, true);
             responseContext

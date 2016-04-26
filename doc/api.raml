@@ -168,7 +168,21 @@ mediaType: application/json
           }
     responses:
       201:
+        headers:
+          Location:
+            type: string
+            example: http://xxx.com/users/123123
       400:
+        description: Bad Request
+        body:
+          application/json:
+            example: |
+              {
+                "error": {
+                    "code": "40001",
+                    "message": "User with the same id already exists"
+                }
+              }
   /{user_id}:
     get:
       description: get user info

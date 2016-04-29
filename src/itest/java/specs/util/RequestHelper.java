@@ -23,6 +23,7 @@ public class RequestHelper {
     public String login() {
         Map<String, Object> info = new HashMap<>();
         info.put("user_name", "admin");
+        info.put("user_password", "123");
         final Response response = client.target(getUrl("/authentication"))
                 .request()
                 .header("Cookie", "")

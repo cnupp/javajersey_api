@@ -14,9 +14,6 @@ import java.util.Properties;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        if(true){
-          System.exit(0);
-        }
         String entryPointOfTestTarget = System.getenv("ENTRYPOINT");
         Main instance = new Main();
         if (entryPointOfTestTarget == null) {
